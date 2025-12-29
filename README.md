@@ -27,10 +27,9 @@ The objective of this project is to develop a **Digital Resume Builder Web Appli
 4. Click **Download PDF** to save the resume.
 
 ## 📸 Screenshots
-- Colorful resume builder interface  
-- Filled resume form with live preview  
+- resume builder interface  
+- Filled resume form with live preview (generate)
 - Downloaded resume PDF output  
-- GitHub repository overview page  
 
 ## ✅ Expected Outcome
 A fully functional **Digital Resume Builder** that provides:
