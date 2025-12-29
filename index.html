@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Emoji Resume Builder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg,#f093fb,#f5576c,#4facfe,#43e97b);
+    background-size: 300% 300%;
+    animation: bgMove 12s ease infinite;
+  }
+
+  @keyframes bgMove {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 34px;
+  }
+
+  h1 span {
+    background: linear-gradient(to right,#ff512f,#dd2476);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+  }
+
+  label::before {
+    content: "👉 ";
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    margin-top: 6px;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    background: linear-gradient(to right,#667eea,#764ba2);
+    color: white;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.04);
+  }
+
+  .preview {
+    margin-top: 35px;
+    padding: 25px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.45);
+  }
+
+  .preview h2::before { content: "👤 "; }
+  .preview p:nth-child(2)::before { content: "📧 "; }
+  .preview p:nth-child(3)::before { content: "🎓 "; }
+  .preview p:nth-child(4)::before { content: "💼 "; }
+
+  footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>✨ <span>Digital Resume Builder</span> ✨</h1>
+
+  <!-- VERTICAL FORM -->
+  <label>Name</label>
+  <input type="text" id="name" placeholder="Your Name 😊">
+
+  <label>Email</label>
+  <input type="email" id="email" placeholder="your@email.com 📩">
+
+  <label>Education</label>
+  <textarea id="education" placeholder="Your education 🎓"></textarea>
+
+  <label>Experience</label>
+  <textarea id="experience" placeholder="Your experience 💼"></textarea>
+
+  <button onclick="generateResume()">🚀 Generate Resume</button>
+  <button onclick="downloadPDF()">📄 Download PDF</button>
+
+  <!-- PREVIEW -->
+  <div class="preview">
+    <h2 id="pname"></h2>
+    <p id="pemail"></p>
+    <p><b>Education:</b> <span id="pedu"></span></p>
+    <p><b>Experience:</b> <span id="pexp"></span></p>
+  </div>
+
+  <footer>
+    💖 Developed by <b>TAMILARUVI.S</b>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+  function generateResume() {
+    pname.innerText = name.value;
+    pemail.innerText = email.value;
+    pedu.innerText = education.value;
+    pexp.innerText = experience.value;
+  }
+
+  function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text("✨ DIGITAL RESUME ✨", 10, 15);
+    doc.text("👤 Name: " + name.value, 10, 30);
+    doc.text("📧 Email: " + email.value, 10, 40);
+    doc.text("🎓 Education: " + education.value, 10, 55);
+    doc.text("💼 Experience: " + experience.value, 10, 75);
+
+    doc.save("Tamilaruvi_Resume.pdf");
+  }
+</script>
+
+</body>
+</html>
+<script>
+function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  let y = 20;
+
+  doc.setFontSize(16);
+  doc.text("DIGITAL RESUME", 10, y);
+  y += 10;
+
+  doc.setFontSize(12);
+  doc.text("Name: " + name.value, 10, y);
+  y += 8;
+
+  doc.text("Email: " + email.value, 10, y);
+  y += 10;
+
+  doc.text("Education:", 10, y);
+  y += 6;
+  doc.text(doc.splitTextToSize(education.value, 180), 10, y);
+  y += 20;
+
+  doc.text("Experience:", 10, y);
+  y += 6;
+  doc.text(doc.splitTextToSize(experience.value, 180), 10, y);
+
+  doc.save("Tamilaruvi_Resume.pdf");
+}
+</script>
